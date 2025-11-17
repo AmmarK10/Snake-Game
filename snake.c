@@ -4,7 +4,7 @@
     - R to restart after Game Over
     - Esc or Q to quit
   Compile:
-    gcc snake.c -o snake.exe -I "D:\SDL\x86_64-w64-mingw32\include" -L "D:\SDL\x86_64-w64-mingw32\lib" -lSDL3.
+    gcc snake.c -o snake.exe -I "D:\SDL\x86_64-w64-mingw32\include" -L "D:\SDL\x86_64-w64-mingw32\lib" -lSDL3
 */
 
 #include <stdio.h>
@@ -25,7 +25,6 @@
 
 typedef struct { int x, y; } Cell;
 
-/* ---------- Simple digit renderer (7-segment style) ---------- */
 static void drawSegment(SDL_Renderer *ren, float x, float y, float w, float h) {
     SDL_FRect r = { x, y, w, h };
     SDL_RenderFillRect(ren, &r);
@@ -33,16 +32,16 @@ static void drawSegment(SDL_Renderer *ren, float x, float y, float w, float h) {
 
 static void drawDigit(SDL_Renderer *ren, int digit, float x, float y, float scale) {
     static const int segs[10][7] = {
-        {1,1,1,0,1,1,1}, //0
-        {0,0,1,0,0,1,0}, //1
-        {1,0,1,1,1,0,1}, //2
-        {1,0,1,1,0,1,1}, //3
-        {0,1,1,1,0,1,0}, //4
-        {1,1,0,1,0,1,1}, //5
-        {1,1,0,1,1,1,1}, //6
-        {1,0,1,0,0,1,0}, //7
-        {1,1,1,1,1,1,1}, //8
-        {1,1,1,1,0,1,1}  //9
+        {1,1,1,0,1,1,1}, 
+        {0,0,1,0,0,1,0}, 
+        {1,0,1,1,1,0,1}, 
+        {1,0,1,1,0,1,1}, 
+        {0,1,1,1,0,1,0}, 
+        {1,1,0,1,0,1,1}, 
+        {1,1,0,1,1,1,1}, 
+        {1,0,1,0,0,1,0}, 
+        {1,1,1,1,1,1,1}, 
+        {1,1,1,1,0,1,1}  
     };
     if (digit < 0 || digit > 9) return;
 
@@ -50,13 +49,13 @@ static void drawDigit(SDL_Renderer *ren, int digit, float x, float y, float scal
     float thick  = 4.0f * scale;
 
     const int *on = segs[digit];
-    if (on[0]) drawSegment(ren, x, y, segLen, thick);                        // top
-    if (on[1]) drawSegment(ren, x, y+thick, thick, segLen);                  // top-left
-    if (on[2]) drawSegment(ren, x+segLen-thick, y+thick, thick, segLen);     // top-right
-    if (on[3]) drawSegment(ren, x, y+segLen, segLen, thick);                 // middle
-    if (on[4]) drawSegment(ren, x, y+segLen+thick, thick, segLen);           // bottom-left
-    if (on[5]) drawSegment(ren, x+segLen-thick, y+segLen+thick, thick, segLen); // bottom-right
-    if (on[6]) drawSegment(ren, x, y+2*segLen+thick, segLen, thick);         // bottom
+    if (on[0]) drawSegment(ren, x, y, segLen, thick);
+    if (on[1]) drawSegment(ren, x, y+thick, thick, segLen);                  
+    if (on[2]) drawSegment(ren, x+segLen-thick, y+thick, thick, segLen);     
+    if (on[3]) drawSegment(ren, x, y+segLen, segLen, thick);
+    if (on[4]) drawSegment(ren, x, y+segLen+thick, thick, segLen);           
+    if (on[5]) drawSegment(ren, x+segLen-thick, y+segLen+thick, thick, segLen); 
+    if (on[6]) drawSegment(ren, x, y+2*segLen+thick, segLen, thick);         
 }
 
 static void drawChar(SDL_Renderer *ren, char c, float x, float y, float scale) {
@@ -76,7 +75,6 @@ static void drawText(SDL_Renderer *ren, const char *s, float x, float y, float s
     }
 }
 
-/* ---------- Game helpers ---------- */
 static void spawnFood(Cell *food, Cell snake[], int snake_len) {
     while (1) {
         int rx = rand() % GRID_COLS;
@@ -89,7 +87,6 @@ static void spawnFood(Cell *food, Cell snake[], int snake_len) {
     }
 }
 
-/* ---------- Main ---------- */
 int main(int argc, char *argv[]) {
     (void)argc; (void)argv;
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
@@ -116,7 +113,7 @@ int main(int argc, char *argv[]) {
     bool running = true;
     bool gameOver = false;
 
-    const Uint64 moveDelay = 100; // ms per move
+    const Uint64 moveDelay = 100; 
     Uint64 lastMove = SDL_GetTicks();
 
     SDL_Event ev;
@@ -172,7 +169,6 @@ int main(int argc, char *argv[]) {
             }
         }
 
-        /* -------- Rendering -------- */
         SDL_SetRenderDrawColor(ren, 16, 16, 16, 255);
         SDL_RenderClear(ren);
 
@@ -193,8 +189,8 @@ int main(int argc, char *argv[]) {
         SDL_RenderFillRect(ren, &frect);
 
         for (int i = 0; i < snake_len; ++i) {
-            if (i == 0) SDL_SetRenderDrawColor(ren, 60, 220, 60, 255);
-            else SDL_SetRenderDrawColor(ren, 30, 160, 30, 255);
+            if (i == 0) SDL_SetRenderDrawColor(ren, 180, 60, 220, 255); 
+            else SDL_SetRenderDrawColor(ren, 128, 0, 128, 255);  
 
             SDL_FRect r = { snake[i].x * CELL_SIZE + 1.0f,
                             TOP_MARGIN + snake[i].y * CELL_SIZE + 1.0f,
