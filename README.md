@@ -7,18 +7,18 @@ Simple graphics, smooth movement, and old-school fun!
 
 ##  Game Preview
  
-![Game Screenshot](screenshot.png)
+![Game Screenshot](Assets/SDL_ss.png)
 
 ---
 
 ##  Features
 
-✔ Classic Nokia-style gameplay  
-✔ Smooth snake movement using SDL3  
-✔ Score tracking  
-✔ Collision detection (walls & self)  
-✔ Simple and lightweight C implementation  
-✔ Cross-platform (Windows / Linux / macOS)
+- Classic Nokia-style gameplay  
+- Smooth snake movement using SDL3  
+- Score tracking  
+- Collision detection (walls & self)  
+- Simple and lightweight C implementation  
+- Cross-platform (Windows / Linux / macOS)
 
 ---
 
